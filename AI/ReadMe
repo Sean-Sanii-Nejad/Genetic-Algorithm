@@ -1,3 +1,5 @@
+100/100
+
 This folder contains my first attempt at programming a genetic algorithm for my Introduction to Intelligent Systems module. Assess.java was coded by the modules lecturer with Example.java having only the timer and submission code implemented.
 
 This genetic algorihtm solves two problems, the first being a black box with 20 value inputs. The algorithm finds the correct values using mutation and outputs a fitness of 0 once found.
