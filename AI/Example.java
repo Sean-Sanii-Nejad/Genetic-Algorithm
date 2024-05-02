@@ -37,11 +37,11 @@ class Example {
 								
 		Random rand = new Random();						
 
-	    //Generate 100 candidate solutions			
-        for(int i=0; i<candidatePopulation.length;i++)
-        {
-		candidatePopulation[i] = generateCandidateSolution(); 						
-	}
+	    	//Generate 100 candidate solutions			
+	        for(int i=0; i<candidatePopulation.length;i++)
+	        {
+			candidatePopulation[i] = generateCandidateSolution(); 						
+		}
 			
 		boolean check = true;
 		while(check)
@@ -74,8 +74,7 @@ class Example {
 		}
 									
 //	----------------------------------------------------------------------------------------------------------------------------------------------------------------------------			
-//		Second Problem:
-		
+//		Second Problem:	
 		System.out.println("Now let us turn to the second problem:");
 		System.out.println("A sample solution in this case is a boolean array of size 100.");
 		System.out.println("I now create a random sample solution and get the weight and utility:");
@@ -100,78 +99,78 @@ class Example {
 	
 		int crossoverChance2 = 80;
 		
-	//Generate 100 candidate solutions			
-        for(int i=0; i<candidatePopulationBoolean.length;i++)
-        {
-        	candidatePopulationBoolean[i] = generateCandidateSolutionBoolean();  					
-		}	
-		boolean check2 = true;
-		while(check2)
-		{
-			long endT2= System.currentTimeMillis();
-			generationCounter = generationCounter + 1;
-			for(int i=0; i<candidatePopulationBoolean.length; i++)
+		//Generate 100 candidate solutions			
+	        for(int i=0; i<candidatePopulationBoolean.length;i++)
+	        {
+	        	candidatePopulationBoolean[i] = generateCandidateSolutionBoolean();  					
+			}	
+			boolean check2 = true;
+			while(check2)
 			{
-				//Randomly Selected Candidate Solutions
-				firstCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];			
-				secondCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];
-				thirdCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];			
-				forthCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];
-				
-				//Tournament 1		
-				betterCandidateSolutionBoolean = tournamentSelectionBoolean(firstCandidateSolutionBoolean, secondCandidateSolutionBoolean);	
-				//Tournament 2			
-				betterCandidatePopulationBoolean[i] = tournamentSelectionBoolean(thirdCandidateSolutionBoolean, forthCandidateSolutionBoolean); 
+				long endT2= System.currentTimeMillis();
+				generationCounter = generationCounter + 1;
+				for(int i=0; i<candidatePopulationBoolean.length; i++)
+				{
+					//Randomly Selected Candidate Solutions
+					firstCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];			
+					secondCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];
+					thirdCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];			
+					forthCandidateSolutionBoolean = candidatePopulationBoolean[rand.nextInt(POP_SIZE_2)];
+					
+					//Tournament 1		
+					betterCandidateSolutionBoolean = tournamentSelectionBoolean(firstCandidateSolutionBoolean, secondCandidateSolutionBoolean);	
+					//Tournament 2			
+					betterCandidatePopulationBoolean[i] = tournamentSelectionBoolean(thirdCandidateSolutionBoolean, forthCandidateSolutionBoolean); 
+									
+					if(rand.nextInt(100) < crossoverChance2)
+					{
+						//Child of the two winning parents
+						betterCandidatePopulationBoolean[i] = crossoverBoolean(betterCandidatePopulationBoolean[i], betterCandidateSolutionBoolean);
+					}
+					//Mutating the child
+					betterCandidatePopulationBoolean[i] = mutationBoolean(betterCandidatePopulationBoolean[i]);
+					fitnessBoolean = Assess.getTest2(betterCandidatePopulationBoolean[i]);	
+					//Printing out the fitness of the mutated child
+					System.out.println("fitness is: " + " " + Arrays.toString(fitnessBoolean));
+	
+					//Checking a candidate solution's fitness and cloning it to submission variable and exiting loop, solutions based on mark scheme.
 								
-				if(rand.nextInt(100) < crossoverChance2)
-				{
-					//Child of the two winning parents
-					betterCandidatePopulationBoolean[i] = crossoverBoolean(betterCandidatePopulationBoolean[i], betterCandidateSolutionBoolean);
-				}
-				//Mutating the child
-				betterCandidatePopulationBoolean[i] = mutationBoolean(betterCandidatePopulationBoolean[i]);
-				fitnessBoolean = Assess.getTest2(betterCandidatePopulationBoolean[i]);	
-				//Printing out the fitness of the mutated child
-				System.out.println("fitness is: " + " " + Arrays.toString(fitnessBoolean));
-
-				//Checking a candidate solution's fitness and cloning it to submission variable and exiting loop, solutions based on mark scheme.
-							
-				if(fitnessBoolean[0] <= 500 && fitnessBoolean[1] >= 210)
-				{
-					sol2 = betterCandidatePopulationBoolean[i].clone();
-					check2 = false;					
-				}
-
-				if(fitnessBoolean[0] <= 500 && fitnessBoolean[1] >= 203 && (endT2 - startT)/1000.0 >= 4.75 && (endT2 - startT)/1000.0 <= 19.75)
-				{
-					sol2 = betterCandidatePopulationBoolean[i].clone();
-					check2 = false;
-				}
-
-				if(fitnessBoolean[0] <= 500 && fitnessBoolean[1] >= 190 && (endT2 - startT)/1000.0 >= 20 && (endT2 - startT)/1000.0 <= 59.5)
-				{
-					sol2 = betterCandidatePopulationBoolean[i].clone();
-					check2 = false;
-				}
-            		}		
-			candidatePopulationBoolean = betterCandidatePopulationBoolean;	                  
+					if(fitnessBoolean[0] <= 500 && fitnessBoolean[1] >= 210)
+					{
+						sol2 = betterCandidatePopulationBoolean[i].clone();
+						check2 = false;					
+					}
+	
+					if(fitnessBoolean[0] <= 500 && fitnessBoolean[1] >= 203 && (endT2 - startT)/1000.0 >= 4.75 && (endT2 - startT)/1000.0 <= 19.75)
+					{
+						sol2 = betterCandidatePopulationBoolean[i].clone();
+						check2 = false;
+					}
+	
+					if(fitnessBoolean[0] <= 500 && fitnessBoolean[1] >= 190 && (endT2 - startT)/1000.0 >= 20 && (endT2 - startT)/1000.0 <= 59.5)
+					{
+						sol2 = betterCandidatePopulationBoolean[i].clone();
+						check2 = false;
+					}
+	            		}		
+				candidatePopulationBoolean = betterCandidatePopulationBoolean;	                  
+			}
+	
+			//Now checking the fitness of the candidate solution
+			double[] tmp =(Assess.getTest2(sol2));
+	
+			//The index 0 of tmp gives the weight. Index 1 gives the utility
+			System.out.println("The weight is: " + tmp[0]);
+			System.out.println("The utility is: " + tmp[1]);
+	
+			//Once completed, your code must submit the results you generated, including your name and login: 
+			//Use and adapt  the function below:
+			Assess.checkIn(name,login,sol1,sol2);
+	
+			//Do not delete or alter the next line
+			long endT= System.currentTimeMillis();
+			System.out.println("Total execution time was: " +  ((endT - startT)/1000.0) + " seconds");
 		}
-
-		//Now checking the fitness of the candidate solution
-		double[] tmp =(Assess.getTest2(sol2));
-
-		//The index 0 of tmp gives the weight. Index 1 gives the utility
-		System.out.println("The weight is: " + tmp[0]);
-		System.out.println("The utility is: " + tmp[1]);
-
-		//Once completed, your code must submit the results you generated, including your name and login: 
-		//Use and adapt  the function below:
-		Assess.checkIn(name,login,sol1,sol2);
-
-		//Do not delete or alter the next line
-		long endT= System.currentTimeMillis();
-		System.out.println("Total execution time was: " +  ((endT - startT)/1000.0) + " seconds");
-	}
 
 	public static double[] crossover(double[] firstCandidateSolution, double[] secondCandidateSolution)
 	{
