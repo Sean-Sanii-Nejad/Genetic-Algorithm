@@ -2,12 +2,9 @@
 import java.lang.Math;
 import java.util.*; 
 
-
 class Example {
-
 	public static final int POP_SIZE = 100;
 	public static final int SOL_SIZE = 20;
-
 	public static final int POP_SIZE_2 = 100;
 	public static final int SOL_SIZE_2 = 100;
 	public static void main(String[] args)
@@ -20,8 +17,6 @@ class Example {
 		String login = "ss2439@kent.ac.uk";
 
 		System.out.println("These are the instructions of how to use the problem library.  Please make sure you follow the instructions carefully.");
-
-
 		System.out.println("For the first problem, you need to use Assess.getTest1(double[]).");
 		
 		//An example solution consists of an array  of doubles of size 20 
@@ -45,8 +40,8 @@ class Example {
 	    //Generate 100 candidate solutions			
         for(int i=0; i<candidatePopulation.length;i++)
         {
-			candidatePopulation[i] = generateCandidateSolution(); 						
-		}
+		candidatePopulation[i] = generateCandidateSolution(); 						
+	}
 			
 		boolean check = true;
 		while(check)
@@ -86,8 +81,8 @@ class Example {
 		System.out.println("I now create a random sample solution and get the weight and utility:");
 
 		//Creating a sample solution for the second problem
-        //The higher the fitness, the better, but be careful of  the weight constraint!
-        boolean[] sol2 = generateCandidateSolutionBoolean();
+        	//The higher the fitness, the better, but be careful of  the weight constraint!
+        	boolean[] sol2 = generateCandidateSolutionBoolean();
 				
 		boolean[][] candidatePopulationBoolean = new boolean[POP_SIZE][SOL_SIZE];
 		boolean[][] betterCandidatePopulationBoolean = new boolean[POP_SIZE][SOL_SIZE];	
@@ -105,12 +100,11 @@ class Example {
 	
 		int crossoverChance2 = 80;
 		
-		//Generate 100 candidate solutions			
+	//Generate 100 candidate solutions			
         for(int i=0; i<candidatePopulationBoolean.length;i++)
         {
         	candidatePopulationBoolean[i] = generateCandidateSolutionBoolean();  					
-		}
-		
+		}	
 		boolean check2 = true;
 		while(check2)
 		{
@@ -159,7 +153,7 @@ class Example {
 					sol2 = betterCandidatePopulationBoolean[i].clone();
 					check2 = false;
 				}
-            }		
+            		}		
 			candidatePopulationBoolean = betterCandidatePopulationBoolean;	                  
 		}
 
